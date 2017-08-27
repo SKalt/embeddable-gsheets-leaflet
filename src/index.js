@@ -4,7 +4,19 @@ const linkToId = (link) => link
   .replace(/.*\/d\//, '')
   .replace(/\/edit.+/, '');
 
-let url = `https://sheets.googleapis.com/v4/spreadsheets/${ID}/values/${RANGE}`;
+// poll for window closing
+function pollWindow(url, cb){
+  let tab = window.open(url);
+  const checkOpen = () => setTimeout(500, ()=> tab.closed ? cb() : checkOpen());
+}
+
+// get view-able link
+// share > get shareable link
+//
+// make api key @ https://console.cloud.google.com/apis/credentials
+
+let url = `https://sheets.googleapis.com/v4/spreadsheets/${ID}/values/${RANGE}` +
+  `?key=${APIKEY}`;
 
 var data;
 var map = new mapboxgl.Map(); //TODO: params
