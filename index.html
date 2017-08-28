@@ -1,26 +1,28 @@
 <head>
 
 </head>
+
 <body>
   <article>
     <div id="step_0">
       <h2>Consider whether using google sheets is appropriate</h2>
       <div>
         <p>
-          If you are interested in hosting geodata that is more
+          Hosting via google sheets provides a free way to host geodata that changes frequently and provides a user-friendly way to manually update data. If you are interested in hosting geodata that is
         </p>
         <ul>
           <li>
-            than 500 views per 100 seconds
-            <a href="https://developers.google.com/sheets/api/limits">(the api limit)</a>
+            private
           </li>
           <li>
-            than a few hundred rows
+            more than 500 views per 100 seconds
+            <a href="https://developers.google.com/sheets/api/limits" target="goog">(the api limit)</a>
+          </li>
+          <li>
+            more than a few hundred rows
           </li>
         </ul>
-        google sheets may not be a viable solution.  If you are looking for an easy
-        way to host geodata that changes frequently and provide a user-friendly
-        way to update data, this might be worth it.
+        google sheets may not be a viable solution.
       </div>
     </div>
     <div id="step_1">
@@ -31,35 +33,85 @@
           <span id="share">share</span> > <span id="">get shareable link</span>.
         </p>
         <p>
-           Paste the link here: <input id="ID" type="textbox"/>
+          Paste the link here: <input id="ID" type="textbox" />
         </p>
       </div>
     </div>
     <div id="step_2">
-      <h2>Configure data handling</h2>
+      <h2>Acquire, Secure a Google Sheets API Key</h2>
       <div>
         <p>
-          <!-- TODO: ?(header, cache),
-           config(range, geometry (lat/lng/col/url)), colnames, cols to display -->
-           <!-- TODO: checkboxes for cols -->
+          Go to <a id="api_key">your google cloud credentials dashboard</a>. Click create credentials > api key.</p>
+        <img src="" /> <img src="" />
+        <p>
+          Confirm key creation by clicking 'restrict key'. </p>
+        <img src="" />
+        <p>
+          Go to your newly created api key and restrict its use to your intended site.
+        </p>
+        <img src="" />
+        <p>
+          Note that anyone can use this key on your whitelisted site(s) to call the google sheets api. The key will not give users any permissions. To prevent api quota theft, Google
+          <a href="https://support.google.com/cloud/answer/6310037" target="goog">recommends</a> keeping API keys out of front-end.
         </p>
       </div>
     </div>
     <div id="step_3">
-      <h2>Acquire, Secure a Google Sheets API Key</h2>
-      <div>
+      <h2>Configure data handling</h2>
+      <!-- <div>
+        <input type="checkbox" id="cache" value="true" />
+        <label for="cache">Cache your data</label>
+        <div>
+          <span data-toggle="collapse" href="#explanation_1"> more <span class="glyphicon glyphicon-chevron-right"></span></span>
+          <p id="explanation_1">
+            Since the end application uses the
+            <a href="https://developer.mozilla.org/en/docs/Web/API/Fetch_API" target="mdn">fetch API</a>
+            your data are cached by default, potentially saving your quota or
+            blocking clients from viewing updated data.
+          </p>
+        </div> -->
+        <div id="gsheets-output-options-1">
+          <input type="checkbox" id="header"  /><label for="header">Has a header</label>
+          <div id="colnames">
+            <!-- TODO: colname input -->
+          </div>
+
+          <input type="textbox" placeholder="data range in A1 notation"/>
+          <span class="glyphicon glyphicon-question-sign" data-toggle="collapse" data-target="a1-explanation"></span>
+          <div class="collapse" id="a1-explanation">
+            A1 notation is in the form <pre>"sheet id"!A1:B2</pre>, where A1 and
+            B2 are column letter, row number pairs.  See
+            <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation" target="goog">the google sheets API</a>
+            for the full A1 notation documentation.
+          </div>
+        </div>
+        <div id="map-options-1">
+          <input type="checkbox" id="tooltips" /><label for="tooltips">Include tooltips</label>
+          <form id="renderer">
+            <input type="radio" name="renderer" id="leaflet" />
+            <label for="leaflet" >Leaflet</label>
+            <input type="radio" name="renderer" id="mapbox"  />
+            <label for="mapbox">Mapbox-gl-js</label>
+          </form>
+        </div>
         <p>
-          Go to <a id="api_key">your google cloud credentials dashboard</a>.
-          Click create credentials > api key. Confirm key creation by clicking
-          'restrict key'. Go to your newly created api key and restrict its use
-          to your intended site.
-        </p>
-        <p>
-          Note that anyone can use this key on your whitelisted site(s) to call
-          the google sheets api.  The key will not give them any credentials.
-          Google does not
+          <!-- TODO: ?(header...),
+           config(range, geometry (lat/lng/col/url)), colnames, cols to display -->
+          <!-- TODO: checkboxes for cols -->
         </p>
       </div>
+    </div>
+    <div id="step_4">
+      <h2>Style your data</h2>
+      <div>
+        <!-- TODO: gradient or categorical -->
+        <!-- stops -->
+        <!-- <input type="color" id="color_picker"/> -->
+        <!-- allow dds-function? -->
+      </div>
+    </div>
+    <div id="step_5">
+      Try it out : <a id="test"><span class="glyphicon glyphicon-globe"></span></a>
     </div>
   </article>
 </body>
