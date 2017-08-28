@@ -7,7 +7,8 @@ const linkToId = (link) => link
 // poll for window closing
 function pollWindow(url, cb){
   let tab = window.open(url);
-  const checkOpen = () => setTimeout(500, ()=> tab.closed ? cb() : checkOpen());
+  const checkOpen = () => setTimeout(()=> tab.closed ? cb() : checkOpen(), 500);
+  checkOpen();
 }
 
 // get view-able link
