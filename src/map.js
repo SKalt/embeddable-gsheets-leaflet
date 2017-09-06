@@ -63,8 +63,15 @@ const pointToLayer = (feature, latLng) => L.circleMarker(latlng, style);
 function onEachFeature(feature, layer){
   return layer.bindPopup(propertyTable(feature.properties));
 }
+L.map('map').setView([lat, lng], zoom);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+  maxZoom: 18,
+  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+  id: 'mapbox.light'
+}).addTo(map);
 try {
-  L.map('map').setView([lat, lng], zoom);
   let url = 'https://sheets.googleapis.com/v4/spreadsheets/' +
     `${sheetId}/values/{range}?key=${apiKey}`;
   fetch(url).then(response => {
